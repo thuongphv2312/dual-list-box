@@ -9,7 +9,7 @@
     </head>
     <body>
         <h1>Home Page</h1>
-        <div id="dual-list-box"  data=<%= data %>>
+        <div id="dual-list-box" data=<%= data %>>
             <div class="dual-list-box-header">
                 <input type="text" placeholder="Search" oninput="search()">
             </div>
@@ -31,10 +31,10 @@
                     </div>
                 </div>
                 <div class="button-action">
-                    <input type="button" commandType="addAll" value="Add all">
-                    <input type="button" commandType="add" value="Add">
-                    <input type="button" commandType="remove" value="Remove">
-                    <input type="button" commandType="removeAll" value="Remove all">
+                    <input type="button" commandtype="addAll" value="Add all">
+                    <input type="button" commandtype="add" value="Add">
+                    <input type="button" commandtype="remove" value="Remove">
+                    <input type="button" commandtype="removeAll" value="Remove all">
                 </div>
                 <div class="list-box-right">
                     <div class="box-title">
@@ -42,9 +42,7 @@
                     </div>
                     <div class="values-selected setWidth">
                         <ul>
-                            <!-- <div class="value-selected">
-
-                            </div> -->
+                            <!-- <div class="value-selected"> </div> -->
                         </ul>
                     </div>
                 </div>
@@ -59,104 +57,129 @@
             console.log("valuesAvailable :>> ", valuesAvailable);
             //click bgclor yellow
             $(".value-available").off("click");
-            $(".values-available").on("click",".value-available",function () {
-                $(".values-available").find(".bg-yellow").removeClass("bg-yellow");
+            $(".values-available").on("click", ".value-available", function () {
+                $(".values-available")
+                    .find(".bg-yellow")
+                    .removeClass("bg-yellow");
                 $(this).addClass("bg-yellow");
             });
             $(".value-selected").off("click");
-            $(".values-selected").on("click",".value-selected",function () {
-                $(".values-selected").find(".bg-yellow").removeClass("bg-yellow");
+            $(".values-selected").on("click", ".value-selected", function () {
+                $(".values-selected")
+                    .find(".bg-yellow")
+                    .removeClass("bg-yellow");
                 $(this).addClass("bg-yellow");
             });
             //double click add
             $('.value-available').dblclick(function () {
-                let value = $(this).text().trim();
+                let value = $(this)
+                    .text()
+                    .trim();
                 $(this).remove();
-                if(!valuesSelected.includes(value) && value){
-                  valuesSelected.push(value);
-                  valuesAvailable = [...valuesAvailable.filter(val=>val!=value)]
+                if (!valuesSelected.includes(value) && value) {
+                    valuesSelected.push(value);
+                    valuesAvailable = [...valuesAvailable.filter(val => val != value)]
                 };
 
-                    let x = $(`<div class="value-selected"><li>${value}</li></div>`);
-                    $(".values-selected").find("ul").append(x);
+                let x = $(`<div class="value-selected"><li>${value}</li></div>`);
+                $(".values-selected")
+                    .find("ul")
+                    .append(x);
 
             });
             //double click remove
             $('.value-selected').dblclick(function () {
-                let value = $(this).text().trim();
+                let value = $(this)
+                    .text()
+                    .trim();
                 console.log("object :>> ", object);
                 $(this).remove();
-                if(!valuesAvailable.includes(value) && value){
-                  valuesAvailable.push(value);
-                  valuesSelected = [...valuesSelected.filter(val=>val!=value)]
+                if (!valuesAvailable.includes(value) && value) {
+                    valuesAvailable.push(value);
+                    valuesSelected = [...valuesSelected.filter(val => val != value)]
                 };
 
-                    let x = $(`<div class="value-available"><li>${value}</li></div>`);
-                    $(".values-available").find("ul").append(x);
+                let x = $(`<div class="value-available"><li>${value}</li></div>`);
+                $(".values-available")
+                    .find("ul")
+                    .append(x);
 
             });
             //add
-            $('.button-action [commandType="add"]').click(
-            function(){
-                let value = $(".values-available").find(".bg-yellow").text().trim();
-                $(".values-available").find(".bg-yellow").remove();
+            $('.button-action [commandType="add"]').click(function () {
+                let value = $(".values-available")
+                    .find(".bg-yellow")
+                    .text()
+                    .trim();
+                $(".values-available")
+                    .find(".bg-yellow")
+                    .remove();
                 console.log("value:>> ", value);
-                if(value){
-                  valuesSelected.push(value);
-                  valuesAvailable =[...valuesAvailable.filter(val=>val != value)];
-                  console.log("x", valuesAvailable);
-                  console.log("y", valuesSelected);
-                  let x = $(`<div class="value-selected"><li>${value}</li></div>`);
-                    $(".values-selected").find("ul").append(x);
+                if (value) {
+                    valuesSelected.push(value);
+                    valuesAvailable = [...valuesAvailable.filter(val => val != value)];
+                    console.log("x", valuesAvailable);
+                    console.log("y", valuesSelected);
+                    let x = $(`<div class="value-selected"><li>${value}</li></div>`);
+                    $(".values-selected")
+                        .find("ul")
+                        .append(x);
                 };
             });
             //add all
-            $('.button-action [commandType="addAll"]').click(
-                function(){
-                    valuesSelected = valuesSelected.concat(valuesAvailable);
-                    $(".value-available").remove();
-                    valuesAvailable.map(value=>{
-                        let x = $(`<div class="value-selected"><li>${value}</li></div>`);
-                        $(".values-selected").find("ul").append(x);
+            $('.button-action [commandType="addAll"]').click(function () {
+                valuesSelected = valuesSelected.concat(valuesAvailable);
+                $(".value-available").remove();
+                valuesAvailable.map(value => {
+                    let x = $(`<div class="value-selected"><li>${value}</li></div>`);
+                    $(".values-selected")
+                        .find("ul")
+                        .append(x);
                 })
-                                    valuesAvailable = [];
-                }
-            )
+                valuesAvailable = [];
+            })
             //remove
-            $('.button-action [commandType="remove"]').click(
-            function(){
-                let value = $(".values-selected").find(".bg-yellow").text();
+            $('.button-action [commandType="remove"]').click(function () {
+                let value = $(".values-selected")
+                    .find(".bg-yellow")
+                    .text();
                 console.log("value :>> ", value);
-                $(".values-selected").find(".bg-yellow").remove();
-                if(value){
-                  valuesAvailable.push(value);
-                  valuesSelected = [...valuesSelected.filter(val=>val!=value)];
-                  let x = $(`<div class="value-available"><li>${value}</li></div>`);
+                $(".values-selected")
+                    .find(".bg-yellow")
+                    .remove();
+                if (value) {
+                    valuesAvailable.push(value);
+                    valuesSelected = [...valuesSelected.filter(val => val != value)];
+                    let x = $(`<div class="value-available"><li>${value}</li></div>`);
                     $(".values-available ul").append(x);
                 };
             });
 
             //remove all
-            $('.button-action [commandType="removeAll"]').click(
-                function(){
-                    $(".value-selected").remove();
-                    $(".value-available").remove();
-                    valuesAvailable =[...valuesAvailable.concat(valuesSelected)];
-                    valuesAvailable.map(value=>{
-                        let x = $(`<div class="value-available"><li>${value}</li></div>`);
-                        $(".values-available").find("ul").append(x);
-                   })
-                   valuesSelected = [];
-                }
-            )
+            $('.button-action [commandType="removeAll"]').click(function () {
+                $(".value-selected").remove();
+                $(".value-available").remove();
+                valuesAvailable = [...valuesAvailable.concat(valuesSelected)];
+                valuesAvailable.map(value => {
+                    let x = $(`<div class="value-available"><li>${value}</li></div>`);
+                    $(".values-available")
+                        .find("ul")
+                        .append(x);
+                })
+                valuesSelected = [];
+            })
 
             //search
-            function search(){
-                let value = $(".dual-list-box-header").find("input").val();
+            function search() {
+                let value = $(".dual-list-box-header")
+                    .find("input")
+                    .val();
                 let check = valuesAvailable.includes(value);
-                values = [...valuesAvailable.filter(val=>{
-                    if (value.includes(val)) return val;
-                })];
+                values = [...valuesAvailable.filter(val => {
+                        if (value.includes(val))
+                            return val;
+                        }
+                    )];
                 console.log('values :>> ', values);
             }
         </script>
